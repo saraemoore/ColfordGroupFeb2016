@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->  
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<title>Twitter &amp; Trauma Care</title>
+	<meta name="description" content="Twitter & Trauma Care">
+	<meta name="author" content="Sara E. Moore, Alan E. Hubbard, Rachael A. Callcut">
+	<meta name="generator" content="slidify" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=1024, user-scalable=no">
+	
+	<!-- Required stylesheet -->
+	<link rel="stylesheet" href="libraries/frameworks/deckjs/core/deck.core.css">
+	<link rel="stylesheet" href="libraries/frameworks/deckjs/extensions/goto/deck.goto.css">
+<link rel="stylesheet" href="libraries/frameworks/deckjs/extensions/hash/deck.hash.css">
+<link rel="stylesheet" href="libraries/frameworks/deckjs/extensions/menu/deck.menu.css">
+<link rel="stylesheet" href="libraries/frameworks/deckjs/extensions/navigation/deck.navigation.css">
+<link rel="stylesheet" href="libraries/frameworks/deckjs/extensions/scale/deck.scale.css">
+<link rel="stylesheet" href="libraries/frameworks/deckjs/extensions/status/deck.status.css">
+<!-- Style theme. More available in /themes/style/  -->
+	<link rel="stylesheet" href="libraries/frameworks/deckjs/themes/style/swiss.css">
+	
+	<!-- Transition theme. More available in /themes/transition/  -->
+	<link rel="stylesheet" href="libraries/frameworks/deckjs/themes/transition/horizontal-slide.css">
+	<script src="libraries/frameworks/deckjs/modernizr.custom.js"></script>
+	
+	<!-- LOAD STYLE SHEETS -->
+	<link rel="stylesheet" href="libraries/highlighters/highlight.js/css/zenburn.css">
+	
+	  <link rel="stylesheet" href = "assets/css/ribbons.css">
+<link rel="stylesheet" href = "assets/css/swiss_ucbmod.css">
+
+</head>
+
+<body class="deck-container">
+
+  <!-- Begin slides -->
+  <section class="slide " id="slide-1">
+  
+<aside class="gdbar">
+  <img src="assets/img/ucseal_line_k.png">
+</aside>
+<div>
+  <h1 id="firstslidetitle">Twitter &amp; Trauma Care</h1>
+  <h3 id="firstslidesubtitle" style="text-align: center;" >Using social media to inform trauma center patient load</h3>
+  <p id="firstslideauthor">Sara E. Moore, Alan E. Hubbard, Rachael A. Callcut<br/><br/>4 February 2016</p>
+</div>
+<article></article>
+<!--
+prez.dir = "/path/to/parent/dir"
+setwd(prez.dir)
+library(slidify)
+author("myprezname", open_rmd = FALSE,
+    scaffold = file.path("~/Dropbox/school/berkeley/slidify_template") # only run this once
+prez.dir = file.path(prez.dir, "myprezname")
+setwd(prez.dir)
+slidify("index.Rmd")
+browseURL("index.html")
+# runDeck(deckDir = prez.dir, shiny = FALSE)
+publish(user = "saraemoore", repo = "ColfordGroupFeb2016")
+-->
+
+</section>
+<section class="slide " id="slide-2">
+  <h2>Objectives</h2>
+  <p>Use real-time social media data to:</p>
+
+<ul>
+<li>detect mass-casualty incidents and/or</li>
+<li>predict location-specific trauma center volume.</li>
+</ul>
+
+<p>Goal: to build an early warning system for trauma centers.</p>
+
+<!-- % WHO: MCI = an event which generates more patients at one time than locally available resources can manage using routine procedures. -->
+
+</section>
+<section class="slide " id="slide-3">
+  <h2>Data</h2>
+  <ul>
+<li>Pilot analysis: Historical Twitter data on
+
+<ul>
+<li>Asiana Airlines crash at SFO (Jul 2013, $n \approx 400$k),</li>
+<li>South Napa earthquake (Aug 2014, $n \approx 200$k),</li>
+<li>Boston Marathon bombing (Apr 2013, \(n \approx 1.1\) mil),</li>
+<li>Marysville Pilchuck High School shooting (Oct 2014, $n \approx 250$k), and</li>
+<li>Sandy Hook Elementary School shooting (Dec 2012, \(n \approx 1.8\) mil).</li>
+</ul></li>
+<li>Currently collecting add&#39;l data via streaming API.</li>
+</ul>
+
+<!--
+Observations summarized here include only those with a `postedTime` after the event time and prior to the end of the collection period (typically 7 days after the start of the collection period). When more than 20 levels of a factor exist, only the first 20 are displayed. Counts of missing values are excluded from graphical summaries. one row corresponds to one tweet (or retweet). Boxplots are displayed for continuous variables, with a green cross denoting the mean of that variable.
+-->
+
+</section>
+<section class="slide " id="slide-4">
+  <h2>Exploratory Analyses</h2>
+  <p><a href="file:///Users/fpgcdi/Dropbox/Trauma%20and%20Coagulation%20(White%20Space%20Conflict)/Twitter/prelim_analysis/index.html">Link</a></p>
+
+</section>
+<section class="slide " id="slide-5">
+  <h2>Acquiring Twitter data</h2>
+  <ul>
+<li><a href="https://dev.twitter.com/rest/public">Twitter&#39;s REST APIs</a>
+
+<ul>
+<li>Conduct singular searches, read user profile information, or post Tweets.</li>
+<li>Most common: <a href="https://dev.twitter.com/rest/public/search">Twitter Search API</a>
+
+<ul>
+<li>Limitations: <a href="https://dev.twitter.com/rest/public/rate-limits">Rate limited</a> (max number of queries every 15 mins), max 100 tweets returned per query, only past 7 days, may not be complete</li>
+</ul></li>
+</ul></li>
+<li><a href="https://dev.twitter.com/streaming/overview">Twitter&#39;s Streaming API</a>
+
+<ul>
+<li>Monitor or process Tweets in real-time.</li>
+<li>Most common: <a href="https://dev.twitter.com/streaming/public">Public streams</a> &rarr; <a href="https://dev.twitter.com/streaming/reference/post/statuses/filter">POST statuses/filter</a>
+
+<ul>
+<li>Returns public statuses that match one or more filter predicates.</li>
+<li>Limitations: one connection at a time allowed per account, subject to streaming cap (max out at small percentage of total tweet volume), frequent reconnects may result in rate limiting/brief IP blocking</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</section>
+<section class="slide " id="slide-6">
+  <h2>Acquiring Twitter data, continued</h2>
+  <ul>
+<li><a href="https://gnip.com/">Gnip</a> (now owned by Twitter)
+
+<ul>
+<li>Costs $$$</li>
+<li>Realtime
+
+<ul>
+<li>Most common: <a href="https://gnip.com/realtime/powertrack/">PowerTrack</a>: filtered firehose</li>
+</ul></li>
+<li>Historical
+
+<ul>
+<li><a href="http://support.gnip.com/code/historical_powertrack.html">Historical PowerTrack</a>: RESTful version of PowerTrack</li>
+<li><a href="https://gnip.com/historical/30-day-search/">30-Day Search API</a></li>
+<li><a href="https://gnip.com/historical/full-archive-search/">Full Archive Search API</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<!--
+As of April, 2015, 'firehose' access is cut off for all third-party resellers. Now it all goes through Gnip, which was acquired by Twitter in May, 2014. ([1](http://www.forbes.com/sites/benkepes/2015/04/11/how-to-kill-your-ecosystem-twitter-pulls-an-evil-move-with-its-firehose/), [2](http://thenextweb.com/dd/2015/04/11/twitter-cuts-off-firehose-resellers-as-it-brings-data-access-fully-in-house/), [3](http://www.infoworld.com/article/2908869/big-data/twitters-firehose-shut-off-is-the-newest-hazard-of-the-api-economy.html))
+-->
+
+</section>
+<section class="slide " id="slide-7">
+  <h2>Processing Twitter data</h2>
+  <ul>
+<li>In R: See CRAN&#39;s <a href="https://cran.r-project.org/web/views/WebTechnologies.html">&quot;Web Technologies&quot; package collection</a>, particularly the &quot;parsing Data from the Web&quot; and &quot;social media&quot; sections</li>
+<li>Not in R: Twitter&#39;s list of tools for <a href="https://dev.twitter.com/overview/api/twitter-libraries">other programming languages</a></li>
+</ul>
+
+</section>
+<section class="slide " id="slide-8">
+  <h2>Processing Twitter data in R</h2>
+  
+<div style='float:left;width:48%;' class='centered'>
+  <ul>
+<li>Parsing JSON (javascript object notation) files:
+
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/rjson/index.html">rjson</a>,</li>
+<li><a href="https://cran.r-project.org/web/packages/RJSONIO/index.html">RJSONIO</a>, and</li>
+<li><strong><a href="https://cran.r-project.org/web/packages/jsonlite/index.html">jsonlite</a></strong>.</li>
+</ul></li>
+<li>Reading from REST APIs:
+
+<ul>
+<li><strong>twitteR</strong> (<a href="https://cran.r-project.org/web/packages/twitteR/index.html">CRAN</a>/<a href="https://github.com/geoffjentry/twitteR">github</a>)</li>
+<li><a href="https://github.com/joyofdata/RTwitterAPI">RTwitterAPI</a></li>
+</ul></li>
+<li>Reading from Streaming API:
+
+<ul>
+<li><strong>streamR</strong> (<a href="https://cran.r-project.org/web/packages/streamR/index.html">CRAN</a>/<a href="https://github.com/pablobarbera/streamR">github</a>)</li>
+<li>tweet2r (<a href="https://cran.r-project.org/web/packages/tweet2r/index.html">CRAN</a>/<a href="https://github.com/pauarago/tweet2r">github</a>)</li>
+</ul></li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li>Authenticating via OAuth:
+
+<ul>
+<li>ROAuth (<a href="https://cran.r-project.org/web/packages/ROAuth/index.html">CRAN</a>/<a href="https://github.com/geoffjentry/ROAuth">github</a>)</li>
+</ul></li>
+<li>Other Resources:
+
+<ul>
+<li>Workshop materials and slides: <a href="https://github.com/pablobarbera/social-media-workshop">Analyzing and Collecting Social Media Data with R</a></li>
+</ul></li>
+</ul>
+
+</div>
+</section>
+<section class="slide " id="slide-9">
+  <h2>Visualization</h2>
+  
+<div style='float:left;width:48%;' class='centered'>
+  <p><a href="http://www.htmlwidgets.org/">htmlwidgets</a> (interactive JavaScript-based graphics from within R):</p>
+
+<ul>
+<li><a href="https://github.com/htmlwidgets/sparkline">sparkline</a> for small inline Tufte-style plots</li>
+<li><a href="http://rstudio.github.io/DT/">DT</a> (aka DataTables)</li>
+<li><a href="https://rstudio.github.io/dygraphs/">dygraphs</a> for time series</li>
+<li><a href="http://hrbrmstr.github.io/streamgraph/">streamgraph</a>, also for time series</li>
+<li><a href="https://rstudio.github.io/leaflet/">leaflet</a> for mapping</li>
+<li>etc.</li>
+</ul>
+
+</div>
+<div style='float:right;width:48%;'>
+  <ul>
+<li>Use with <a href="http://rmarkdown.rstudio.com">R Markdown</a> or <a href="http://shiny.rstudio.com/">Shiny</a></li>
+<li><strong><a href="http://hafen.github.io/htmlwidgetsgallery/">Gallery of htmlwidgets</a></strong></li>
+</ul>
+
+</div>
+</section>
+<section class="slide " id="slide-10">
+  <h1>Thanks!</h1>
+  
+</section>
+</body>
+  <!-- deck.navigation snippet -->
+  <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+  <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+  
+  <!-- deck.status snippet -->
+  <p class="deck-status">
+  <span class="deck-status-current"></span>
+    /
+  <span class="deck-status-total"></span>
+  </p>
+  
+  <!-- deck.goto snippet -->
+  <form action="." method="get" class="goto-form">
+  	<label for="goto-slide">Go to slide:</label>
+  	<input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+  	<datalist id="goto-datalist"></datalist>
+  	<input type="submit" value="Go">
+  </form>
+  
+  <!-- deck.hash snippet -->
+  <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
+  
+  
+  <!-- Grab CDN jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/frameworks/deckjs/jquery-1.7.min.js"><\/script>')</script>
+  
+  <!-- Add Slide Class to Build Elements -->
+  <script type='text/javascript'>
+  $('ol.build li').addClass('slide')
+  $('ul.build li').addClass('slide')
+  </script>
+  
+  <!-- Deck Core and extensions -->
+  <script src="libraries/frameworks/deckjs/core/deck.core.js"></script>
+  <script src="libraries/frameworks/deckjs/extensions/goto/deck.goto.js"></script>
+<script src="libraries/frameworks/deckjs/extensions/hash/deck.hash.js"></script>
+<script src="libraries/frameworks/deckjs/extensions/menu/deck.menu.js"></script>
+<script src="libraries/frameworks/deckjs/extensions/navigation/deck.navigation.js"></script>
+<script src="libraries/frameworks/deckjs/extensions/scale/deck.scale.js"></script>
+<script src="libraries/frameworks/deckjs/extensions/status/deck.status.js"></script>
+<!-- Initialize the deck -->
+  <script>
+  $(function() {
+  	$.deck('.slide');
+  });
+  </script>  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      processEscapes: true
+    }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+<script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+<script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!-- DONE LOADING HIGHLIGHTER JS FILES -->
+ 
+
+</html>

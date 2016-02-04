@@ -1,0 +1,111 @@
+.deck-container {
+  font-family: "Open Sans", "Arial", sans-serif;
+  font-size: 1.3em;
+  background: #EEEEEE; /* webbackgroundgrey */
+  background-image: url("../img/furley_bg_@2X.png");
+/*  background-image: url("../img/grey_@2X.png"); */
+  background-size: contain;
+}
+.deck-container .slide {
+  background: #EEEEEE; /* webbackgroundgrey */
+  background-image: url("../img/furley_bg_@2X.png");
+/*  background-image: url("../img/grey_@2X.png"); */
+  background-size: contain;
+}
+.deck-container .slide h1 {
+  color: #003262; /* berkeleyblue */
+}
+.deck-container .slide h2 {
+  color: #3B7EA1; /* foundersrock */
+}
+.deck-container .slide h3 {
+  color: #46535E; /* webpacific */
+}
+.deck-container .slide code {
+  color: #3B7EA1; /* foundersrock */
+}
+.deck-container .slide blockquote {
+  color: #003262; /* berkeleyblue */
+}
+.deck-container .slide ::-moz-selection {
+  background: #B9D3B6; /* sathergate */
+  color: #EEEEEE; /* webbackgroundgrey */
+}
+.deck-container .slide ::selection {
+  background: #B9D3B6; /* sathergate */
+}
+.deck-container .slide a, .deck-container .slide a:hover, .deck-container .slide a:focus, .deck-container .slide a:active, .deck-container .slide a:visited {
+  /*color: #B9D3B6; */ /* sathergate */
+  color: #00A598; /* weblaplane */
+}
+.deck-container .deck-prev-link:hover, .deck-container .deck-prev-link:focus, .deck-container .deck-next-link:hover, .deck-container .deck-next-link:focus {
+  background: #B9D3B6; /* sathergate */
+}
+
+#firstslidetitle {
+  font-size: 4.0em;
+  top: 35%;
+  position: absolute;
+}
+
+#firstslidesubtitle {
+  bottom: 25%;
+  font-size: 1.75em;
+  font-weight: bold;
+  text-align: left;
+  position: absolute;
+  /* color: #FDB515; */ /* californiagold */
+  color: #C4820E; /* webmedalist */
+}
+
+#firstslideauthor {
+  font-size: 1.2em;
+  font-weight: bold;
+  bottom: 7.5%;
+  position: absolute;
+}
+
+aside.gdbar {
+  height: 97px;
+  width: 300px;
+  position: absolute;
+  right: 25px;
+  bottom: 10%;
+  -webkit-border-radius: 0 10px 10px 0;
+  -moz-border-radius: 0 10px 10px 0;
+  -ms-border-radius: 0 10px 10px 0;
+  -o-border-radius: 0 10px 10px 0;
+  border-radius: 0 10px 10px 0;
+  background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #e6e6e6), color-stop(100%, #e6e6e6)) no-repeat;
+  background: -webkit-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
+  background: -moz-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
+  background: -o-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
+  background: -ms-linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
+  background: linear-gradient(left, #e6e6e6, #e6e6e6) no-repeat;
+  -webkit-background-size: 0% 100%;
+  -moz-background-size: 0% 100%;
+  -o-background-size: 0% 100%;
+  background-size: 0% 100%;
+  -webkit-transition: all 0.5s ease-out 0.5s;
+  -moz-transition: all 0.5s ease-out 0.5s;
+  -ms-transition: all 0.5s ease-out 0.5s;
+  -o-transition: all 0.5s ease-out 0.5s;
+  transition: all 0.5s ease-out 0.5s;
+  /* Better to transition only on background-size, but not sure how to do that with the mixin. */
+}
+
+aside.gdbar img {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  right: 0;
+  margin: 8px 15px;
+}
+
+.smallfoot {
+  font-size: .3em;
+  position: absolute;
+  bottom: 0px;
+  left: 50px;
+  z-index: 10;
+}
